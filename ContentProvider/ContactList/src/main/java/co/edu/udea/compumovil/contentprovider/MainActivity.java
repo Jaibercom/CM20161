@@ -83,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                     records[i++] =String.format("%-15.15s %s", name, phoneNumber);
                     phoneCursor.close();
-                    /*
+
+                }
+                 /*
                     // Query and loop for every email of the contact
                     Cursor emailCursor = contentResolver.query(EmailCONTENT_URI, null, EmailCONTACT_ID + " = ?", new String[]{contact_id}, null);
 
@@ -97,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
                     emailCursor.close();
                     */
-                }
 
                 //output.append("\n");
 
