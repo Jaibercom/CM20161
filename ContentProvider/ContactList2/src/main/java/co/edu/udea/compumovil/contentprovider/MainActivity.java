@@ -19,6 +19,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,44 @@ public class MainActivity extends AppCompatActivity {
 
         String records[] = getRecords();
 
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, records));
+       /* listView.setAdapter(new CursorAdapter() {
+            @Override
+            public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+                return null;
+            }
+
+            @Override
+            public void bindView(View view, Context context, Cursor cursor) {
+
+            }
+        });*/
+
+        //TwolineAdapter adapter = new TwolineAdapter(this, android.R.layout.simple_list_item_2)
+
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, android.R.id.text1, records));
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, android.R.id.text2, records));
+
+    }
+
+
+    private class TwolineAdapter extends ArrayAdapter<String>{
+
+
+        public TwolineAdapter(Context context, int resource, int textViewResourceId, List<String> objects) {
+            super(context, resource, textViewResourceId, objects);
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+            TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+            //text1.setText(persons.get(position).getName());
+            //text2.setText(persons.get(position).getAge());
+            return view;
+        }
 
     }
 
@@ -55,13 +94,13 @@ public class MainActivity extends AppCompatActivity {
 
         ContentResolver contentResolver = getContentResolver();
 
-        Cursor cursor = contentResolver.query(CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME);
+        Cursor cursor = contentResolver.query(CONTENT_URI, null, null, null, null);
 
         String records[] = new String[cursor.getCount()];
         int i=0;
-
+        // Loop for every contact in the phone
         if (cursor.getCount() > 0) {
-            // Loop for every contact in the phone
+
             while (cursor.moveToNext()) {
 
                 String contact_id = cursor.getString(cursor.getColumnIndex(_ID));
@@ -73,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     output.append("\n First Name:" + name);
 
                     // Query and loop for every phone number of the contact
+
                     Cursor phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, Phone_CONTACT_ID + " = ?", new String[]{contact_id}, null);
 
                     while (phoneCursor.moveToNext()) {
@@ -81,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
                         output.append("\n Phone number:" + phoneNumber);
 
                     }
-                    records[i++] =String.format("%-15.15s %s", name, phoneNumber);
+                    //records[i] = name + "\t" + phoneNumber;
+                    records[i] =String.format("%-15.15s %s", name, phoneNumber);
+                    i++;
                     phoneCursor.close();
                     /*
                     // Query and loop for every email of the contact
