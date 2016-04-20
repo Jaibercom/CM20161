@@ -1,1 +1,1 @@
-include ':Socket'
+include ':Socket', ':HttpURLConnection', ':ClientJSONParser'
