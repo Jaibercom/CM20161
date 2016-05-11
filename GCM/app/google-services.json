@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "268651802691",
+    "project_id": "gcmclient-dc9ea"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268651802691:android:cc64fa5f539b185f",
+        "android_client_info": {
+          "package_name": "co.edu.udea.compumovil.gcm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHDEwwQjMOZb5BMHN0UZ-_PaLQuHzq5a8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
